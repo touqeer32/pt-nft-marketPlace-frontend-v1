@@ -169,7 +169,7 @@ export default function BidDetails(probs) {
           offerData={data.offerCreatedEntities[selectedOfferIndex]}
           isListed={probs.isListed}
           setLoadSubGraphData={probs.setLoadSubGraphData}
-          userAddress={probs.userAddress.toLowerCase()}
+          userAddress={probs.userAddress}
         />
       )}
     </>

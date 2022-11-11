@@ -20,16 +20,22 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ItemDetail(probs) {
-  console.log("ItemDetail ==>", probs);
   const router = useRouter();
 
   const [loadSubGraphData, setLoadSubGraphData] = useState(true);
+  const [userAddress, setUserAddress] = useState("");
 
   const [openModle, setOpenModle] = useState(false);
   function onUnListItemClick() {
     setOpenModle(true);
     return openModle;
   }
+  useEffect(() => {
+    // console.log("categories.length", categories.length);
+    if (probs.loadSubGraphData) {
+      setUserAddress(probs.userAddress);
+    }
+  });
   function onUnListItemClose() {
     setOpenModle(false);
     return openModle;
@@ -280,24 +286,25 @@ export default function ItemDetail(probs) {
           // </Link>
         )}
       </section>
-
-      <BidDetails
-        collectionAddress={probs.collectionAddress}
-        tokenId={probs.tokenId}
-        injectedProvider={probs.injectedProvider}
-        currency={probs.currency}
-        price={probs.price}
-        uri={probs.uri}
-        isFixedPrice={probs.isFixedPrice}
-        nftName={probs.nftName}
-        wallet={probs.wallet}
-        isOwner={probs.isOwner}
-        signature={probs.signature}
-        isListed={probs.isListed}
-        loadSubGraphData={loadSubGraphData}
-        setLoadSubGraphData={setLoadSubGraphData}
-        userAddress={probs.userAddress.toLowerCase()}
-      />
+      {userAddress != "" && (
+        <BidDetails
+          collectionAddress={probs.collectionAddress}
+          tokenId={probs.tokenId}
+          injectedProvider={probs.injectedProvider}
+          currency={probs.currency}
+          price={probs.price}
+          uri={probs.uri}
+          isFixedPrice={probs.isFixedPrice}
+          nftName={probs.nftName}
+          wallet={probs.wallet}
+          isOwner={probs.isOwner}
+          signature={probs.signature}
+          isListed={probs.isListed}
+          loadSubGraphData={loadSubGraphData}
+          setLoadSubGraphData={setLoadSubGraphData}
+          userAddress={userAddress}
+        />
+      )}
       <Collections
         collectionAddress={probs.collectionAddress}
         wallet={probs.wallet}
